@@ -8,9 +8,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 55daccc09a3b69647bbab145b54a3ab3
-  - enabled: 1
+  - enabled: 0
     path: Assets/Samples/Meta XR Core SDK/69.0.1/Mixed Reality Sample/MixedReality.unity
     guid: fc8cf684948f0654f9bb46acfbba709e
+  - enabled: 1
+    path: Assets/Scenes/ObjectTracking.unity
+    guid: bf685d74e0f770f42a70d8923e3a8236
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: bfa1182bd221b4ca89619141f66f1260, type: 2}
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: dc5a169419fa04987b057f65238cf3ba, type: 2}
