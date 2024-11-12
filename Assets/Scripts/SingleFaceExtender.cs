@@ -1,19 +1,17 @@
 using UnityEngine;
 
-public class CubeFaceExtender : MonoBehaviour
+public class SingleFaceExtender : MonoBehaviour
 {
     public float ExtendAmount = 0.1f;
     private Mesh mesh;
     private Vector3[] originalVertices;
     private Vector3[] vertices;
     private int[] triangles;
-    private MeshRenderer meshRenderer;
-
+    
     void Start()
     {
         // Get the mesh and its vertices
         mesh = GetComponent<MeshFilter>().mesh;
-        meshRenderer = GetComponent<MeshRenderer>();
         
         // Duplicate the mesh to prevent affecting other cubes
         mesh = Instantiate(mesh);
@@ -25,46 +23,10 @@ public class CubeFaceExtender : MonoBehaviour
         triangles = mesh.triangles;
     }
     
-    [ContextMenu("forward")]
-    public void Forward()
-    {
-        meshRenderer.enabled = true;
-        ExtendFace(Vector3.forward, ExtendAmount);
-    }
-    
-    [ContextMenu("backward")]
-    public void Backword()
-    {
-        meshRenderer.enabled = true;
-        ExtendFace(Vector3.back, ExtendAmount);
-    }
-    
-    [ContextMenu("right")]
-    public void Right()
-    {
-        meshRenderer.enabled = true;
-        ExtendFace(Vector3.right, ExtendAmount);
-    }
-    
-    [ContextMenu("left")]
-    public void Left()
-    {
-        meshRenderer.enabled = true;
-        ExtendFace(Vector3.left, ExtendAmount);
-    }
-    
-    [ContextMenu("up")]
+    [ContextMenu("UP")]
     public void Up()
     {
-        meshRenderer.enabled = true;
         ExtendFace(Vector3.up, ExtendAmount);
-    }
-    
-    [ContextMenu("down")]
-    public void Down()
-    {
-        meshRenderer.enabled = true;
-        ExtendFace(Vector3.down, ExtendAmount);
     }
     
     public void ExtendFace(Vector3 direction, float amount)
