@@ -45,7 +45,7 @@ public class AutomaticCubeDetector : MonoBehaviour
                 Vector3 surfacePosition = new Vector3(tableCenter.x, hit.point.y, tableCenter.z);
 
                 rubixCubePrefab.SetActive(true);
-                UiGameobject.SetActive(true);
+                //UiGameobject.SetActive(true);
 
                 // Place the cube at the calculated surface position
                 rubixCubePrefab.transform.position = surfacePosition+ Vector3.down * 0.03f; // Add a small offset if needed

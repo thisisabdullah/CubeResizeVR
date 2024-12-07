@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CubeFaceExtender : MonoBehaviour
 {
@@ -7,7 +8,7 @@ public class CubeFaceExtender : MonoBehaviour
     private Vector3[] originalVertices;
     private Vector3[] vertices;
     private int[] triangles;
-    private MeshRenderer meshRenderer;
+    [HideInInspector] public MeshRenderer meshRenderer;
 
     void Start()
     {
@@ -79,6 +80,36 @@ public class CubeFaceExtender : MonoBehaviour
             {
                 // Extend vertex in the given direction
                 vertices[i] += direction * amount;
+            }
+        }
+
+        // Update the mesh with the new vertices
+        mesh.vertices = vertices;
+        mesh.RecalculateNormals();
+        mesh.RecalculateBounds();
+    }
+    
+    public void DeExtendFace(Vector3 direction, float amount)
+    {
+        // Convert direction to local space if necessary
+        direction = transform.InverseTransformDirection(direction);
+
+        // Loop through all vertices and de-extend the ones on the specified face
+        for (int i = 0; i < vertices.Length; i++)
+        {
+            if (IsOnFace(originalVertices[i], direction))
+            {
+                // Only de-extend if it does not go beyond the original position
+                Vector3 targetPosition = vertices[i] - direction * amount;
+                if (Vector3.Dot(targetPosition - originalVertices[i], direction) > 0)
+                {
+                    vertices[i] = targetPosition;
+                }
+                else
+                {
+                    vertices[i] = originalVertices[i];
+                    meshRenderer.enabled = false;
+                }
             }
         }
 
