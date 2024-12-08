@@ -1,19 +1,18 @@
 using TMPro;
 using UnityEngine;
 using Meta.XR.MRUtilityKit;
+using UnityEngine.Serialization;
 
 public class AutomaticCubeDetector : MonoBehaviour
 {
-    [SerializeField] private GameObject rubixCubePrefab;
-    [SerializeField] private GameObject UiGameobject;
-    public MRUKAnchor.SceneLabels sceneLabels;
-    [SerializeField] private Transform rayStartPoint;
-    [SerializeField] private float rayLength;
+    public float rayLength;
     public OVRHand LeftHand;
+    public GameObject TableMesh;
+    public Transform rayStartPoint;
+    public MRUKAnchor.SceneLabels sceneLabels;
 
     private bool isCubePlaced = false;
     private bool isObjectPlaced = false;
-    //[SerializeField] private float desiredHeightOffset;
 
     private void Update()
     {
@@ -44,12 +43,11 @@ public class AutomaticCubeDetector : MonoBehaviour
                 // Adjust the Y position to place the cube on the surface
                 Vector3 surfacePosition = new Vector3(tableCenter.x, hit.point.y, tableCenter.z);
 
-                rubixCubePrefab.SetActive(true);
-                //UiGameobject.SetActive(true);
+                TableMesh.SetActive(true);
 
                 // Place the cube at the calculated surface position
-                rubixCubePrefab.transform.position = surfacePosition+ Vector3.down * 0.03f; // Add a small offset if needed
-                rubixCubePrefab.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+                TableMesh.transform.position = surfacePosition+ Vector3.down * 0.03f; // Add a small offset if needed
+                TableMesh.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
 
                 isObjectPlaced = true;
             }
